@@ -1,0 +1,174 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:recipes/providers/navigation_provider.dart';
+import 'package:recipes/screens/catalog_screen.dart';
+import 'package:recipes/screens/profile_screen.dart';
+
+class Mainscreen extends StatelessWidget{
+   Mainscreen({super.key});
+   bool isDesktop(BuildContext context) {
+  return MediaQuery.of(context).size.width >= 720;
+}
+
+bool isMobile(BuildContext context) {
+  return MediaQuery.of(context).size.width <= 720;
+}
+
+bool isTablet(BuildContext context) {
+  return MediaQuery.of(context).size.width <= 720;
+}
+
+  final List <Widget> screens = [
+    const Catalogs(),
+    const SizedBox(),
+    const ProfileScreen(),
+  ];
+
+  void _showCategoriesDialog(BuildContext context){
+    showModalBottomSheet(
+      isDismissible: true,
+      isScrollControlled: true,
+      //backgroundColor: Colors.transparent,
+      context: context, 
+      builder: (context) => Column(
+        mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(
+              padding: EdgeInsets.all(10.0),
+              child: Center(child: Text('Choose Categories')),
+            ),
+            ListTile(
+              leading: const Icon(Icons.fastfood_outlined),
+              title: const Text('Quick'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.accessibility_new_outlined),
+              title: const Text('Trending'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.flag_outlined),
+              title: const Text('Nigeria'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.smart_toy_outlined),
+              title: const Text('Smart Suggestion (Ai)'),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        ),
+      );
+  }
+
+  @override
+  Widget build (BuildContext context){
+    final bool desktop = isDesktop(context);
+    final provider = Provider.of<NavigationProvider>(context);
+
+   return Scaffold(
+      // ── Navigation ────────────────────────────────────────
+      body: Row(
+        children: [
+          if (desktop) ...[
+            NavigationRail(
+              selectedIndex: provider.currentIdex, 
+              onDestinationSelected: (index){
+                final provider = context.read<NavigationProvider>();
+                if (index == 1){
+                  if (provider.currentIdex != 0){
+                    provider.changeIdex(0);
+
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      _showCategoriesDialog(context);
+                     });
+                  } else {
+                    _showCategoriesDialog(context);
+                  }
+                } else {
+                  provider.changeIdex(index);
+                }
+              },
+              labelType: NavigationRailLabelType.all, // or .selected
+              selectedIconTheme: Theme.of(context).iconTheme,
+              selectedLabelTextStyle: TextStyle(color: Colors.deepPurple[50]),
+              destinations: const [
+                NavigationRailDestination(
+                  icon: Icon(Icons.home_outlined),
+                  selectedIcon: Icon(Icons.home),
+                  label: Text('Home'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.category_outlined),
+                  selectedIcon: Icon(Icons.category),
+                  label: Text('Categories'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.person_outlined),
+                  selectedIcon: Icon(Icons.person),
+                  label: Text('Profile'),
+                ),
+              ],
+            ),
+            const VerticalDivider(thickness: 5, width: 3),
+          ],
+
+          // Main content
+          Expanded(
+            child: screens [provider.currentIdex],
+          ),
+        ],
+      ),
+
+      // ── Only show bottom bar on mobile ────────────────────
+      bottomNavigationBar: desktop
+          ? null
+          : NavigationBar(
+            backgroundColor: Theme.of(context).colorScheme.background,
+              selectedIndex: provider.currentIdex,
+              onDestinationSelected: (index){
+                final provider = context.read<NavigationProvider>();
+                if (index == 1){
+                  if (provider.currentIdex != 0){
+                    provider.changeIdex(0);
+
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      _showCategoriesDialog(context);
+                     });
+                  } else {
+                    _showCategoriesDialog(context);
+                  }
+                } else {
+                  provider.changeIdex(index);
+                }
+              },
+              destinations: const [
+                NavigationDestination(
+                  icon: Icon(Icons.home_outlined),
+                  selectedIcon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.category_outlined),
+                  selectedIcon: Icon(Icons.category),
+                  label: 'Categories',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.person_outlined),
+                  selectedIcon: Icon(Icons.person),
+                  label: 'Profile',
+                ),
+              ],
+            ),
+    );
+  }
+}

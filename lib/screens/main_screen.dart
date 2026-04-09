@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:recipes/providers/navigation_provider.dart';
 import 'package:recipes/screens/catalog_screen.dart';
 import 'package:recipes/screens/profile_screen.dart';
+import 'package:scroll_to_hide/scroll_to_hide.dart';
+import '../providers/scroll_to_hide_provider.dart';
 
 class Mainscreen extends StatelessWidget{
    Mainscreen({super.key});
@@ -33,9 +35,9 @@ bool isTablet(BuildContext context) {
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Center(child: Text('Choose Categories')),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Center(child: Text('Choose Categories', style: Theme.of(context).textTheme.bodySmall,)),
             ),
             ListTile(
               leading: const Icon(Icons.fastfood_outlined),
@@ -74,6 +76,7 @@ bool isTablet(BuildContext context) {
   Widget build (BuildContext context){
     final bool desktop = isDesktop(context);
     final provider = Provider.of<NavigationProvider>(context);
+    final scrollProvider = Provider.of<ScrollControllerProvider>(context, listen: false);
 
    return Scaffold(
       // ── Navigation ────────────────────────────────────────
@@ -108,8 +111,8 @@ bool isTablet(BuildContext context) {
                   label: Text('Home'),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.category_outlined),
-                  selectedIcon: Icon(Icons.category),
+                  icon: Icon(Icons.restaurant_menu_outlined),
+                  selectedIcon: Icon(Icons.restaurant_menu_outlined),
                   label: Text('Categories'),
                 ),
                 NavigationRailDestination(
@@ -132,43 +135,48 @@ bool isTablet(BuildContext context) {
       // ── Only show bottom bar on mobile ────────────────────
       bottomNavigationBar: desktop
           ? null
-          : NavigationBar(
-            backgroundColor: Theme.of(context).colorScheme.background,
-              selectedIndex: provider.currentIdex,
-              onDestinationSelected: (index){
-                final provider = context.read<NavigationProvider>();
-                if (index == 1){
-                  if (provider.currentIdex != 0){
-                    provider.changeIdex(0);
-
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
+          : ScrollToHide(
+            scrollController: scrollProvider.scrollController,
+            height: 80.0,
+            duration: const Duration(milliseconds: 250),
+            child: NavigationBar(
+              backgroundColor: Theme.of(context).colorScheme.background,
+                selectedIndex: provider.currentIdex,
+                onDestinationSelected: (index){
+                  final provider = context.read<NavigationProvider>();
+                  if (index == 1){
+                    if (provider.currentIdex != 0){
+                      provider.changeIdex(0);
+            
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        _showCategoriesDialog(context);
+                       });
+                    } else {
                       _showCategoriesDialog(context);
-                     });
+                    }
                   } else {
-                    _showCategoriesDialog(context);
+                    provider.changeIdex(index);
                   }
-                } else {
-                  provider.changeIdex(index);
-                }
-              },
-              destinations: const [
-                NavigationDestination(
-                  icon: Icon(Icons.home_outlined),
-                  selectedIcon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.category_outlined),
-                  selectedIcon: Icon(Icons.category),
-                  label: 'Categories',
-                ),
-                NavigationDestination(
-                  icon: Icon(Icons.person_outlined),
-                  selectedIcon: Icon(Icons.person),
-                  label: 'Profile',
-                ),
-              ],
-            ),
+                },
+                destinations: const [
+                  NavigationDestination(
+                    icon: Icon(Icons.home_outlined),
+                    selectedIcon: Icon(Icons.home),
+                    label: 'Home',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.restaurant_menu_outlined),
+                    selectedIcon: Icon(Icons.restaurant_menu_outlined),
+                    label: 'Categories',
+                  ),
+                  NavigationDestination(
+                    icon: Icon(Icons.person_outlined),
+                    selectedIcon: Icon(Icons.person),
+                    label: 'Profile',
+                  ),
+                ],
+              ),
+          ),
     );
   }
 }

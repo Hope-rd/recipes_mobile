@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/providers/recipes_providers.dart';
 import 'package:recipes/domain/recipes.dart';
+import 'package:recipes/screens/profile_screen.dart';
 import '../utils_files/enum.dart';
-import 'dart:ui' as ui;
 
 class RecipeDetailScreen extends StatelessWidget {
   final Recipe recipe;
@@ -34,10 +34,32 @@ class RecipeDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.background,
+        backgroundColor: Colors.transparent,
+        leadingWidth: 120,
+        leading: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const BackButton(),
+            GestureDetector(
+              onTap: () {
+                // navigate to profile screen.
+                 Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ProfileScreen(),
+                        ),
+                      );
+              },
+              child: const CircleAvatar(
+                backgroundImage: NetworkImage('https://images.unsplash.com/photo-1659354219028-cae11db067c4?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+                radius: 12,
+              ),
+            ),
+          ],
+        ),
         iconTheme: const IconThemeData(),
         elevation: 0,
-        title: const Text('Recipes'),
+        title: const Text(''),
         actions: [
           PopupMenuButton(
             icon: const Icon(Icons.more_horiz_outlined),
@@ -77,9 +99,9 @@ class RecipeDetailScreen extends StatelessWidget {
               ),
               
               Padding(
-                                padding: const EdgeInsets.all(14),
+                                padding: const EdgeInsets.only(left: 18, top: 3),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,42 +109,34 @@ class RecipeDetailScreen extends StatelessWidget {
                                         Expanded(
                                           child: Text(
                                             recipe.title,
-                                            style: Theme.of(context).textTheme.titleMedium,
+                                            style: Theme.of(context).textTheme.headlineSmall,
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(height: 12),
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
-                                        Expanded(
-                                          child: Text(
-                                            recipe.description,
-                                            style: Theme.of(context).textTheme.bodySmall,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 2,),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Row(
+                                        Card(
+                                          color: Theme.of(context).colorScheme.background,
+                                          elevation: 2,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Row(
                                           children: [
                                             const Icon(Icons.timer_outlined, size: 17,),
                                             const SizedBox(width: 5,),
                                             Text(
                                               recipe.prepTime,
-                                              style: Theme.of(context).textTheme.bodySmall,
+                                              style: Theme.of(context).textTheme.labelSmall,
                                             ),
                                           ],
                                         ),
-                                        //const SizedBox(width: 18,),
+                                        const SizedBox(width: 11,),
                                         Row(
                                           children: [
                                            const Icon(Icons.star_border_outlined, size: 17,),
@@ -133,61 +147,67 @@ class RecipeDetailScreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        Row(
-                                          children: [
-                                           IconButton(
-                                            onPressed: () {
-                                             // code here 
-                                            },
-                                            icon: const Icon(Icons.thumb_up_outlined, size: 17,),
-                                            ),
-                                            const SizedBox(width: 5,),
-                                            Text(
-                                              recipe.rate.toString(),
-                                              style: Theme.of(context).textTheme.labelSmall,
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                        IconButton(
+                                        const SizedBox(width: 3,),
+                                        Text(
+                                          recipe.description,
+                                          style: Theme.of(context).textTheme.labelSmall,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 2,),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        ElevatedButton(
+                                         onPressed: () {
+                                          // code here 
+                                         },
+                                         child: Row(
+                                          children: const [
+                                             Icon(Icons.thumb_up_alt_outlined, size: 20,),
+                                             SizedBox(width: 3,),
+                                             Text('react')
+                                          ],
+                                         ),
+                                         ),
+                                         const SizedBox(width: 5,),
+                                         ElevatedButton(
+                                         onPressed: () => provider.toggleSaved(recipe),
+                                         child: Row(
+                                          children: [
+                                             Icon(
+                                            provider.isSaved(recipe)
+                                                ? Icons.bookmark
+                                                : Icons.bookmark_border_outlined,
+                                            color: provider.isSaved(recipe) ? Colors.deepPurple[100] : null,
+                                            size: 20,
+                                          ),
+                                            const SizedBox(width: 3,),
+                                            const Text('save')
+                                          ],
+                                         ),
+                                         ),
+                                        /*IconButton(
                                           icon: Icon(
                                             provider.isSaved(recipe)
                                                 ? Icons.bookmark
                                                 : Icons.bookmark_border_outlined,
                                             color: provider.isSaved(recipe) ? Colors.deepPurple[200] : null,
-                                            size: 18,
+                                            size: 20,
                                           ),
                                           onPressed: () => provider.toggleSaved(recipe),
-                                        ),
+                                        ),*/
+                                        const SizedBox(width: 5,),
+                                        ElevatedButton(onPressed: (){}, child: const Text('Ingredients')),
+                                        const SizedBox(width: 5,),
+                                        ElevatedButton(onPressed: (){}, child: const Text('Steps'))
                                       ],
                                     ),
-                                    const SizedBox(height: 15,),
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: <Widget> [
-                                        Text('View Steps', 
-                                              style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500, 
-                                                foreground: Paint()
-                                                   ..shader = ui.Gradient.linear(
-                                                    const Offset(150, 20),
-                                                    const Offset(10, 20),
-                                                    [const Color(0xFFE55275), const Color(0xFFA11F44),]
-                                                   )
-                                                ),
-                                              ),
-                                              //const Icon(Icons.keyboard_arrow_down_outlined, color: Color(0xFFE55275),)
-                                           IconButton(
-                                            onPressed: (){
-                                              // code here
-                                            }, 
-                                            icon: const Icon(Icons.keyboard_arrow_down_outlined,
-                                            color: Color(0xFFE55275), 
-                                            )
-                                            )
-                                      ],
-                                    )
                                   ],
                                 ),
                               ), 

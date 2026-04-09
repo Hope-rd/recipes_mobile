@@ -30,7 +30,7 @@ class RecipeProvider with ChangeNotifier {
         description: "Easy One-Pot Beef Stew for a cozy family Favourite Dinner",
         prepTime: '30 mins',
         rate: 4.5,
-        url: "https://i.pinimg.com/1200x/3e/0e/2c/3e0e2c70609462eb5ff1cf392f653d4a.jpg",
+        url: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.video
       ),
       Recipe(
@@ -39,7 +39,7 @@ class RecipeProvider with ChangeNotifier {
         description: "cool recipes after tough days",
         prepTime: '10 mins',
         rate: 4.8,
-        url: "https://i.pinimg.com/1200x/b7/dd/90/b7dd90a9f66b52d51607565298a264fc.jpg",
+        url: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       Recipe(
@@ -48,7 +48,7 @@ class RecipeProvider with ChangeNotifier {
         description: "Rich US rice delicacy",
         prepTime: '5 mins',
         rate: 3.2,
-        url: "https://i.pinimg.com/736x/50/67/8e/50678e76bab3cd9a1623f6201b10cd6d.jpg",
+        url: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       Recipe(
@@ -57,7 +57,7 @@ class RecipeProvider with ChangeNotifier {
         description: "Sweet crispy sauce burger",
         prepTime: '45 mins',
         rate: 4.7,
-        url: "https://i.pinimg.com/736x/5a/fd/83/5afd8349808ece4505e86a2ef91dc06b.jpg",
+        url: "https://images.unsplash.com/photo-1432139555190-58524dae6a55?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzJ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       Recipe(
@@ -66,7 +66,7 @@ class RecipeProvider with ChangeNotifier {
         description: "Spicy tomato-based rice with veggies",
         prepTime: '30 mins',
         rate: 4.5,
-        url: "https://i.pinimg.com/1200x/f7/77/b5/f777b5136f6bc47fe13d7ddd9350d67a.jpg",
+        url: "https://images.unsplash.com/photo-1484980972926-edee96e0960d?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzF8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       Recipe(
@@ -75,7 +75,7 @@ class RecipeProvider with ChangeNotifier {
         description: "BlackBerry || Drinks || Yummy",
         prepTime: '15 mins',
         rate: 4.5,
-        url: "https://i.pinimg.com/736x/90/70/37/907037dd2bbe56e51073b2f9f5b2f916.jpg",
+        url: "https://plus.unsplash.com/premium_photo-1673809798970-30c14cfd0ab6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       Recipe(
@@ -84,7 +84,7 @@ class RecipeProvider with ChangeNotifier {
         description: "Rich cheesy & saucy meatbal sub delicacy",
         prepTime: '5 mins',
         rate: 5.0,
-        url: "https://i.pinimg.com/1200x/85/c3/de/85c3dec46e77529ddc41c788d23193ef.jpg",
+        url: "https://images.unsplash.com/photo-1432139509613-5c4255815697?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       Recipe(
@@ -93,7 +93,7 @@ class RecipeProvider with ChangeNotifier {
         description: "Sweet chill time dripping dopped",
         prepTime: '30 mins',
         rate: 4.5,
-        url: "https://i.pinimg.com/736x/3c/79/d3/3c79d31f1a4ac7780667d402385dd018.jpg",
+        url: "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       Recipe(
@@ -102,7 +102,7 @@ class RecipeProvider with ChangeNotifier {
         description: "Rest time enhancer",
         prepTime: '30 mins',
         rate: 4.5,
-        url: "https://i.pinimg.com/736x/8f/b1/49/8fb14952b170d17fc022444f7bc7ccec.jpg",
+        url: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
         type: MediaType.image
       ),
       // Add more recipes...

@@ -55,19 +55,19 @@ class ProfileScreen extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(15.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const CircleAvatar(
                       radius: 50,
-                      backgroundImage: NetworkImage('https://media.licdn.com/dms/image/v2/D4D03AQFbjy1W2H_tsw/profile-displayphoto-crop_800_800/B4DZgjez68HAAI-/0/1752941937247?e=1776297600&v=beta&t=FODw9PkoppD_5Ll31207rTE20JNJTlsvZiQidVCuCpU'), // placeholder
+                      backgroundImage: NetworkImage('https://images.unsplash.com/photo-1659354219028-cae11db067c4?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
                     ),
                     const SizedBox(height: 16),
-                    const Text(
-                      'Hope rd',  // or pull from future auth
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    Text(
+                      'Chef Alice',  // or pull from future auth
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -75,7 +75,27 @@ class ProfileScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 32),
-                    GestureDetector(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        TextButton(
+                          onPressed: (){},
+                          child: const Text('Post')
+                          ),
+                          TextButton(
+                          onPressed: (){
+                            Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const SavedRecipesScreen()),
+                        );
+                          },
+                          child: const Text('BookMarks')
+                          )
+                      ],
+                    ),
+                    //const Divider(height: 1,)
+                    /*GestureDetector(
                       onTap: () {
                         Navigator.push(
                           context,
@@ -94,7 +114,7 @@ class ProfileScreen extends StatelessWidget {
                     const Text(
                       'More features coming: notes, ratings, video lessons...',
                       style: TextStyle(color: Colors.grey),
-                    ),
+                    ),*/
                   ],
                 ),
               ),

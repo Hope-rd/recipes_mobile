@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:recipes/providers/recipes_providers.dart';
 import 'package:recipes/theme/theme_Provider.dart';
 import 'providers/navigation_provider.dart';
+import 'providers/scroll_to_hide_provider.dart';
 import 'screens/main_screen.dart';
 import 'package:recipes/theme/theme.dart';
 
@@ -13,6 +14,7 @@ void main(){
     ChangeNotifierProvider(create: (context)  => RecipeProvider(),),
    ChangeNotifierProvider (create: (context)  => NavigationProvider(),),
    ChangeNotifierProvider (create: (context)  => ThemeProvider(),),
+   ChangeNotifierProvider (create: (context)  => ScrollControllerProvider(),),
   ],
   child: const MyApp(),
 ),

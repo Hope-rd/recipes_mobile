@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/providers/recipes_providers.dart';
+import 'package:recipes/providers/scroll_to_hide_provider.dart';
 import 'package:recipes/screens/video_catalog_screen.dart';
+import 'package:scroll_to_hide/scroll_to_hide.dart';
 import '../domain/recipes.dart';
 import '../utils_files/responsive_utils.dart';
 import 'recipe_detail_screen.dart';
@@ -14,6 +16,7 @@ class Catalogs extends StatelessWidget {
 
   @override
   Widget build (BuildContext context){
+    final scrollProvider = Provider.of<ScrollControllerProvider>(context, listen: false);
     final provider = Provider.of<RecipeProvider>(context);
 
     Widget buildMedia(Recipe recipe) {
@@ -65,38 +68,43 @@ class Catalogs extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            GestureDetector(
-              onTap: (){
-                // Navigate to search screen
-                showSearch(
-                context: context,
-                delegate: RecipeSearchDelegate(provider),
-              );
-              },
-              child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                margin: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.background,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.3), // Shadow color
-                      spreadRadius: 1, // How much the shadow spreads
-                      blurRadius: 3, // The softness of the shadow
-                      offset: Offset(1, 1), // Moves the shadow down by 3 pixels
-                    )
-                  ]
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.search, color: Colors.grey,),
-                    SizedBox(width: 10),
-                    Text(
-                      'Search recipes...',
-                      style: TextStyle(color: Colors.grey),
-                    )
-                  ],
+            ScrollToHide(
+              scrollController: scrollProvider.scrollController,
+              height: 84.0,
+              duration: const Duration(milliseconds: 250),
+              child: GestureDetector(
+                onTap: (){
+                  // Navigate to search screen
+                  showSearch(
+                  context: context,
+                  delegate: RecipeSearchDelegate(provider),
+                );
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  margin: EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.3), // Shadow color
+                        spreadRadius: 1, // How much the shadow spreads
+                        blurRadius: 3, // The softness of the shadow
+                        offset: Offset(1, 1), // Moves the shadow down by 3 pixels
+                      )
+                    ]
+                  ),
+                  child: Row(
+                    children: [
+                      Icon(Icons.search, color: Colors.grey,),
+                      SizedBox(width: 10),
+                      Text(
+                        'Search recipes...',
+                        style: TextStyle(color: Colors.grey),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -112,6 +120,7 @@ class Catalogs extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: MasonryGridView.builder(
+                  controller: scrollProvider.scrollController,
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: getGridCrossAxisCount(context),
                   ),

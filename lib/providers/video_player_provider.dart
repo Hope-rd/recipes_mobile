@@ -54,6 +54,7 @@ class VideoPlayerProvider extends ChangeNotifier {
       hasError = true;
       errorMessage = e.toString();
       notifyListeners();
+      // ignore: avoid_print
       print("Video Error: $e");
     }
   }

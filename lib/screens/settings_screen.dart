@@ -8,7 +8,7 @@ class Settings extends StatelessWidget{
   @override
   Widget build (BuildContext context){
     final themeProvider = Provider.of<ThemeProvider>(context);
-    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isLight = Theme.of(context).brightness == Brightness.light;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,18 +30,13 @@ class Settings extends StatelessWidget{
             children: <Widget>[
               ListTile(
                 leading: const Text('Appearance', style: TextStyle(fontSize: 18),),
-                trailing: Card(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        icon: Icon(isDark ? Icons.light_mode : Icons.dark_mode),
-                        tooltip: isDark ? 'Light Mode' : 'Dark Mode',
-                        onPressed: themeProvider.toggleTheme, 
-                      ),
-                    ],
-                  ),
-                ), 
+                trailing: Switch(
+                  value: isLight, 
+                  onChanged: (_){
+                    themeProvider.toggleTheme(); 
+                    },
+                    activeColor: Colors.deepPurple[100],
+                  )
                 ),
                 const Divider(height: 20, thickness: 0.0, indent: 15, endIndent: 15,),
               ListTile(

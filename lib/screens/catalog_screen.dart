@@ -1,14 +1,15 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/providers/recipes_providers.dart';
-import 'package:recipes/providers/scroll_to_hide_provider.dart';
 import 'package:recipes/screens/video_catalog_screen.dart';
-import 'package:scroll_to_hide/scroll_to_hide.dart';
 import '../domain/recipes.dart';
+import '../providers/visibility_provider.dart';
 import '../utils_files/responsive_utils.dart';
 import 'recipe_detail_screen.dart';
+import 'package:recipes/providers/scroll_controller.dart';
 
 
 class Catalogs extends StatelessWidget {
@@ -16,8 +17,12 @@ class Catalogs extends StatelessWidget {
 
   @override
   Widget build (BuildContext context){
-    final scrollProvider = Provider.of<ScrollControllerProvider>(context, listen: false);
     final provider = Provider.of<RecipeProvider>(context);
+    final scrollController = Provider.of<ScrollControllerProvider>(context, listen: false).scrollController;
+    final visibilityProvider = Provider.of<NavVisibilityProvider>(context, listen: false);
+
+    _setupScrollListener(scrollController, visibilityProvider);
+    const double searchHeight = 84.0;
 
     Widget buildMedia(Recipe recipe) {
   if (recipe.type == MediaType.image) {
@@ -46,8 +51,8 @@ class Catalogs extends StatelessWidget {
         ),
         const Center(
           child: Icon(
-            Icons.play_circle_fill,
-            size: 64,
+            Icons.play_arrow_outlined,
+            size: 55,
             color: Colors.white70,
           ),
         ),
@@ -68,11 +73,15 @@ class Catalogs extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            ScrollToHide(
-              scrollController: scrollProvider.scrollController,
-              height: 84.0,
-              duration: const Duration(milliseconds: 250),
-              child: GestureDetector(
+            ValueListenableBuilder<bool>(
+              valueListenable: visibilityProvider.isVisible, 
+              builder: (context, isVisible, child) {
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 350),
+                  height: isVisible ? searchHeight : 0,
+                  curve: Curves.easeInOut,
+                  child: isVisible
+                  ? GestureDetector(
                 onTap: (){
                   // Navigate to search screen
                   showSearch(
@@ -106,8 +115,11 @@ class Catalogs extends StatelessWidget {
                     ],
                   ),
                 ),
+              )
+              : const SizedBox.shrink(),
+                  );
+              }
               ),
-            ),
         Expanded(
           child: Consumer<RecipeProvider>(
           builder: (context, provider, child) {
@@ -120,7 +132,7 @@ class Catalogs extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: MasonryGridView.builder(
-                  controller: scrollProvider.scrollController,
+                  controller: scrollController,
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: getGridCrossAxisCount(context),
                   ),
@@ -185,6 +197,24 @@ class Catalogs extends StatelessWidget {
     );
   }
 }
+
+// ==================== SCROLL LISTENER HELPER ====================
+  void _setupScrollListener(ScrollController controller, NavVisibilityProvider visibilityProvider) {
+    // Prevent adding multiple listeners if build is called again
+    if (controller.hasListeners) return;
+
+    controller.addListener(() {
+      if (!controller.hasClients) return;
+
+      final direction = controller.position.userScrollDirection;
+
+      if (direction == ScrollDirection.reverse) {
+        visibilityProvider.updateVisibility(false);
+      } else if (direction == ScrollDirection.forward) {
+        visibilityProvider.updateVisibility(true);
+      }
+    });
+  }
 
 class RecipeSearchDelegate extends SearchDelegate<String> {
   final RecipeProvider provider;

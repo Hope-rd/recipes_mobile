@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/providers/recipes_providers.dart';
+import 'package:recipes/providers/scroll_controller.dart';
 import 'package:recipes/theme/theme_Provider.dart';
 import 'providers/navigation_provider.dart';
-import 'providers/scroll_to_hide_provider.dart';
+import 'providers/visibility_provider.dart';
 import 'screens/main_screen.dart';
 import 'package:recipes/theme/theme.dart';
 
@@ -14,7 +15,8 @@ void main(){
     ChangeNotifierProvider(create: (context)  => RecipeProvider(),),
    ChangeNotifierProvider (create: (context)  => NavigationProvider(),),
    ChangeNotifierProvider (create: (context)  => ThemeProvider(),),
-   ChangeNotifierProvider (create: (context)  => ScrollControllerProvider(),),
+   ChangeNotifierProvider (create: (context)  => NavVisibilityProvider()),
+   ChangeNotifierProvider (create: (context)  => ScrollControllerProvider()),
   ],
   child: const MyApp(),
 ),
@@ -40,10 +42,3 @@ class MyApp extends StatelessWidget{
       );
   }
 }
-
-/* 
-A ToDo!
-
-1. implement the video player
-2. connect categories to their respective catalog types.
-*/

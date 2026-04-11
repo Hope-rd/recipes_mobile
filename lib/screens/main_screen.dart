@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 import 'package:recipes/providers/navigation_provider.dart';
 import 'package:recipes/screens/catalog_screen.dart';
 import 'package:recipes/screens/profile_screen.dart';
-import 'package:scroll_to_hide/scroll_to_hide.dart';
-import '../providers/scroll_to_hide_provider.dart';
+import '../providers/scroll_controller.dart';
+import '../providers/visibility_provider.dart';
 
 class Mainscreen extends StatelessWidget{
    Mainscreen({super.key});
@@ -30,7 +31,6 @@ bool isTablet(BuildContext context) {
     showModalBottomSheet(
       isDismissible: true,
       isScrollControlled: true,
-      //backgroundColor: Colors.transparent,
       context: context, 
       builder: (context) => Column(
         mainAxisSize: MainAxisSize.min,
@@ -76,7 +76,11 @@ bool isTablet(BuildContext context) {
   Widget build (BuildContext context){
     final bool desktop = isDesktop(context);
     final provider = Provider.of<NavigationProvider>(context);
-    final scrollProvider = Provider.of<ScrollControllerProvider>(context, listen: false);
+    final scrollController = Provider.of<ScrollControllerProvider>(context, listen: false).scrollController;
+    final visibilityProvider = Provider.of<NavVisibilityProvider>(context, listen: false);
+
+     _setupScrollListener(scrollController, visibilityProvider);
+     const double bottomNavHeight = 80.0;
 
    return Scaffold(
       // ── Navigation ────────────────────────────────────────
@@ -135,11 +139,15 @@ bool isTablet(BuildContext context) {
       // ── Only show bottom bar on mobile ────────────────────
       bottomNavigationBar: desktop
           ? null
-          : ScrollToHide(
-            scrollController: scrollProvider.scrollController,
-            height: 80.0,
-            duration: const Duration(milliseconds: 250),
-            child: NavigationBar(
+          : ValueListenableBuilder<bool>(
+              valueListenable: visibilityProvider.isVisible, 
+              builder: (context, isVisible, child) {
+                return AnimatedContainer(
+                  duration: const Duration(milliseconds: 350),
+                  height: isVisible ? bottomNavHeight : 0,
+                  curve: Curves.easeInOut,
+                  child: isVisible
+                  ? NavigationBar(
               backgroundColor: Theme.of(context).colorScheme.background,
                 selectedIndex: provider.currentIdex,
                 onDestinationSelected: (index){
@@ -175,8 +183,29 @@ bool isTablet(BuildContext context) {
                     label: 'Profile',
                   ),
                 ],
+              )
+              : const SizedBox.shrink(),
+                  );
+              }
               ),
-          ),
     );
   }
 }
+
+// ==================== SCROLL LISTENER HELPER ====================
+  void _setupScrollListener(ScrollController controller, NavVisibilityProvider visibilityProvider) {
+    // Prevent adding multiple listeners if build is called again
+    if (controller.hasListeners) return;
+
+    controller.addListener(() {
+      if (!controller.hasClients) return;
+
+      final direction = controller.position.userScrollDirection;
+
+      if (direction == ScrollDirection.reverse) {
+        visibilityProvider.updateVisibility(false);
+      } else if (direction == ScrollDirection.forward) {
+        visibilityProvider.updateVisibility(true);
+      }
+    });
+  }

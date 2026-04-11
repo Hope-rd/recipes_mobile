@@ -1,11 +1,8 @@
+// scroll_controller_provider.dart
 import 'package:flutter/material.dart';
 
 class ScrollControllerProvider with ChangeNotifier {
   final ScrollController scrollController = ScrollController();
-
-  void disposeController() {
-    scrollController.dispose();
-  }
 
   @override
   void dispose() {

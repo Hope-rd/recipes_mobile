@@ -69,7 +69,7 @@ class Catalogs extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
@@ -93,11 +93,11 @@ class Catalogs extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
                   margin: EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
+                    color: Theme.of(context).colorScheme.surface,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.3), // Shadow color
+                        color: Colors.grey.withValues(alpha: 0.3), // Shadow color
                         spreadRadius: 1, // How much the shadow spreads
                         blurRadius: 3, // The softness of the shadow
                         offset: Offset(1, 1), // Moves the shadow down by 3 pixels
@@ -200,9 +200,6 @@ class Catalogs extends StatelessWidget {
 
 // ==================== SCROLL LISTENER HELPER ====================
   void _setupScrollListener(ScrollController controller, NavVisibilityProvider visibilityProvider) {
-    // Prevent adding multiple listeners if build is called again
-    if (controller.hasListeners) return;
-
     controller.addListener(() {
       if (!controller.hasClients) return;
 

@@ -32,7 +32,7 @@ class RecipeDetailScreen extends StatelessWidget {
     final provider = Provider.of<RecipeProvider>(context);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leadingWidth: 120,
@@ -120,7 +120,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         Card(
-                                          color: Theme.of(context).colorScheme.background,
+                                          color: Theme.of(context).colorScheme.surface,
                                           elevation: 2,
                                           child: Row(
                                             mainAxisAlignment: MainAxisAlignment.center,
@@ -150,17 +150,63 @@ class RecipeDetailScreen extends StatelessWidget {
                                             ],
                                           ),
                                         ),
-                                        const SizedBox(width: 3,),
+                                        const SizedBox(width: 5,),
+                                        Card(
+                                          color: Theme.of(context).colorScheme.surface,
+                                          elevation: 2,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Row(
+                                          children: [
+                                            const Text('Views', style: TextStyle(fontSize: 12),),
+                                            const SizedBox(width: 5,),
+                                            Text(
+                                              recipe.rate.toString(),
+                                              style: Theme.of(context).textTheme.labelSmall,
+                                            ),
+                                          ],
+                                        ),
+                                            ],
+                                          ),
+                                        ),
+                                        const SizedBox(width: 5,),
+                                        Card(
+                                          color: Theme.of(context).colorScheme.surface,
+                                          elevation: 2,
+                                          child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Row(
+                                          children: [
+                                            const  Icon(Icons.thumb_up_alt_outlined, size: 17,),
+                                            const SizedBox(width: 35,),
+                                            const  Icon(Icons.message_outlined, size: 17,),
+                                            const SizedBox(width: 35,),
+                                            Icon(
+                                            provider.isSaved(recipe)
+                                                ? Icons.bookmark
+                                                : Icons.bookmark_border_outlined,
+                                            color: provider.isSaved(recipe) ? Colors.deepPurple[100] : null,
+                                            size: 17,
+                                          ),
+                                          ],
+                                        ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 3,),
                                         Text(
                                           recipe.description,
                                           style: Theme.of(context).textTheme.labelSmall,
                                           maxLines: 2,
                                           overflow: TextOverflow.ellipsis,
                                         ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 2,),
-                                    Row(
+                                    /*Row(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       children: [
                                         ElevatedButton(
@@ -202,12 +248,8 @@ class RecipeDetailScreen extends StatelessWidget {
                                           ),
                                           onPressed: () => provider.toggleSaved(recipe),
                                         ),*/
-                                        const SizedBox(width: 5,),
-                                        ElevatedButton(onPressed: (){}, child: const Text('Ingredients')),
-                                        const SizedBox(width: 5,),
-                                        ElevatedButton(onPressed: (){}, child: const Text('Steps'))
                                       ],
-                                    ),
+                                    ),*/
                                   ],
                                 ),
                               ), 

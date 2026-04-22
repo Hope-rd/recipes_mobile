@@ -5,7 +5,6 @@ ThemeData lightMode = ThemeData(
   colorScheme: const ColorScheme.light(
       primary: Colors.black, // temporary
       secondary: Colors.white,
-      background: Color(0xFFFFFFFF),
       surface: Color(0xFFFFFFFF),
     ),
 
@@ -17,13 +16,13 @@ ThemeData lightMode = ThemeData(
       elevation: 0,
     ),
 
-    cardTheme: CardTheme(
+    /*cardTheme: CardThemeData(
       color: const Color(0xFFFFFFFF),
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-    ),
+    ),*/
 
     dividerColor: const Color(0xFFE0E0E0),
 
@@ -56,7 +55,6 @@ ThemeData darkMode = ThemeData(
   colorScheme: const ColorScheme.dark(
       primary: Colors.white, // temporary
       secondary: Colors.white,
-      background: Color(0xFF121212),
       surface: Color(0xFF000000),
     ),
 
@@ -68,13 +66,13 @@ ThemeData darkMode = ThemeData(
       elevation: 0,
     ),
 
-    cardTheme: CardTheme(
+    /*cardTheme: CardThemeData(
       color: const Color(0xFF000000),
       elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-    ),
+    ),*/
 
     dividerColor: const Color(0xFF2C2C2C),
 

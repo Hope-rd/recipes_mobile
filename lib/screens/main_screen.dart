@@ -148,7 +148,7 @@ bool isTablet(BuildContext context) {
                   curve: Curves.easeInOut,
                   child: isVisible
                   ? NavigationBar(
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
                 selectedIndex: provider.currentIdex,
                 onDestinationSelected: (index){
                   final provider = context.read<NavigationProvider>();
@@ -173,7 +173,7 @@ bool isTablet(BuildContext context) {
                     label: 'Home',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.restaurant_menu_outlined),
+                    icon: Icon(Icons.food_bank_outlined),
                     selectedIcon: Icon(Icons.restaurant_menu_outlined),
                     label: 'Categories',
                   ),
@@ -194,9 +194,6 @@ bool isTablet(BuildContext context) {
 
 // ==================== SCROLL LISTENER HELPER ====================
   void _setupScrollListener(ScrollController controller, NavVisibilityProvider visibilityProvider) {
-    // Prevent adding multiple listeners if build is called again
-    if (controller.hasListeners) return;
-
     controller.addListener(() {
       if (!controller.hasClients) return;
 

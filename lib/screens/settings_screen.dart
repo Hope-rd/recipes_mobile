@@ -21,7 +21,7 @@ class Settings extends StatelessWidget{
         ),
         iconTheme: const IconThemeData(),
       ),
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -35,7 +35,7 @@ class Settings extends StatelessWidget{
                   onChanged: (_){
                     themeProvider.toggleTheme(); 
                     },
-                    activeColor: Colors.deepPurple[100],
+                    activeThumbColor: Colors.deepPurple[100],
                   )
                 ),
                 const Divider(height: 20, thickness: 0.0, indent: 15, endIndent: 15,),

@@ -45,7 +45,7 @@ class RecipeProvider with ChangeNotifier {
       Recipe(
         id: 'r3',
         title: "USA Trending Food Meal",
-        description: "Rich US rice delicacy",
+        description: "Rich US rice delicacy || This is a very long description to test the overflow handling in the UI. It should be truncated with an ellipsis if it exceeds the available space.",
         prepTime: '5 mins',
         rate: 3.2,
         url: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGZvb2R8ZW58MHx8MHx8fDA%3D",

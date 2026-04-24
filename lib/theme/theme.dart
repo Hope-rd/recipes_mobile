@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
       primary: Colors.black, // temporary
-      secondary: Colors.white,
+      secondary: Color(0xFFFFFFFF),
       surface: Color(0xFFFFFFFF),
     ),
 
@@ -16,32 +17,43 @@ ThemeData lightMode = ThemeData(
       elevation: 0,
     ),
 
-    /*cardTheme: CardThemeData(
-      color: const Color(0xFFFFFFFF),
-      elevation: 0,
+    cardTheme: CardThemeData(
+      color: const Color.fromARGB(255, 250, 250, 250),
+      elevation: 0.2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-    ),*/
+    ),
 
     dividerColor: const Color(0xFFE0E0E0),
 
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Color(0xFF1C1C1C)),
-      bodyMedium: TextStyle(color: Color(0xFF6B6B6B)),
+    textTheme: GoogleFonts.poppinsTextTheme(
+      TextTheme(
+        bodyLarge: TextStyle(color: Color(0xFF1C1C1C), fontSize: 16),
+      bodyMedium: TextStyle(color: Color(0xFF36454F), fontSize: 10),
       bodySmall: TextStyle(color: Color(0xFF1C1C1C), fontWeight: FontWeight.bold),
+      
       titleLarge: TextStyle(
-        color: Color(0xFF1C1C1C),
+        color: Color(0xFF282828),
         fontWeight: FontWeight.bold,
+        fontSize: 15
       ),
       titleMedium: TextStyle(
         color: Color(0xFF1C1C1C),
         fontWeight: FontWeight.bold,
+        fontSize: 20
       ),
       titleSmall: TextStyle(
         color: Colors.grey,
         fontWeight: FontWeight.normal,
       ),
+
+      labelSmall: TextStyle(
+        color: Color(0xFF1C1C1C),
+        fontSize: 9,
+        fontWeight: FontWeight.w500
+      )
+      )
     ),
 
     iconTheme: const IconThemeData(
@@ -66,32 +78,36 @@ ThemeData darkMode = ThemeData(
       elevation: 0,
     ),
 
-    /*cardTheme: CardThemeData(
+    cardTheme: CardThemeData(
       color: const Color(0xFF000000),
       elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
-    ),*/
+    ),
 
     dividerColor: const Color(0xFF2C2C2C),
 
-    textTheme: const TextTheme(
-      bodyLarge: TextStyle(color: Color(0xFFEDEDED)),
-      bodyMedium: TextStyle(color: Color(0xFFA0A0A0)),
+    textTheme: GoogleFonts.poppinsTextTheme(
+      TextTheme(
+        bodyLarge: TextStyle(color: Color(0xFFEDEDED), fontSize: 16),
+      bodyMedium: TextStyle(color: Color(0xFFA0A0A0), fontSize: 14),
       bodySmall: TextStyle(color: Color(0xFFEDEDED), fontWeight: FontWeight.bold),
       titleLarge: TextStyle(
         color: Color(0xFFEDEDED),
         fontWeight: FontWeight.bold,
+        fontSize: 22
       ),
       titleMedium: TextStyle(
         color: Color(0xFFEDEDED),
         fontWeight: FontWeight.bold,
+        fontSize: 18
       ),
       titleSmall: TextStyle(
         color: Colors.grey,
         fontWeight: FontWeight.normal,
       ),
+      )
     ),
 
     iconTheme: const IconThemeData(

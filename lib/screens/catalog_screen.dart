@@ -97,7 +97,7 @@ class Catalogs extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withValues(alpha: 0.3), // Shadow color
+                        color: Color.fromARGB(255, 158, 158, 158).withValues(alpha: 0.1), // Shadow color
                         spreadRadius: 1, // How much the shadow spreads
                         blurRadius: 3, // The softness of the shadow
                         offset: Offset(1, 1), // Moves the shadow down by 3 pixels
@@ -106,11 +106,11 @@ class Catalogs extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.search, color: Colors.grey,),
+                      Icon(Icons.search, color: Colors.grey[600],),
                       SizedBox(width: 10),
                       Text(
                         'Search recipes...',
-                        style: TextStyle(color: Colors.grey),
+                        style: TextStyle(color: Colors.grey[600]),
                       )
                     ],
                   ),

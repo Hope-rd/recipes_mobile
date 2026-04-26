@@ -35,8 +35,8 @@ class RecipeProvider with ChangeNotifier {
       ),
       Recipe(
         id: 'r2',
-        title: "StrawBerry Banana",
-        description: "cool recipes after tough days",
+        title: "Sea Food Pasta",
+        description: "Delicious seafood pasta with a rich tomato sauce",
         prepTime: '10 mins',
         rate: 4.8,
         url: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fGZvb2R8ZW58MHx8MHx8fDA%3D",
@@ -44,8 +44,8 @@ class RecipeProvider with ChangeNotifier {
       ),
       Recipe(
         id: 'r3',
-        title: "USA Trending Food Meal",
-        description: "Rich US rice delicacy || This is a very long description to test the overflow handling in the UI. It should be truncated with an ellipsis if it exceeds the available space.",
+        title: "USA Trending Food Meals",
+        description: "This popular Usa meals will blow your mind! || This is a very long description to test the overflow handling in the UI. It should be truncated with an ellipsis if it exceeds the available space.",
         prepTime: '5 mins',
         rate: 3.2,
         url: "https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mjh8fGZvb2R8ZW58MHx8MHx8fDA%3D",
@@ -71,8 +71,8 @@ class RecipeProvider with ChangeNotifier {
       ),
       Recipe(
         id: 'r6',
-        title: "BlackBerry Drinks",
-        description: "BlackBerry || Drinks || Yummy",
+        title: "Saused Pasta!",
+        description: "Delicious || saucy || Yummy",
         prepTime: '15 mins',
         rate: 4.5,
         url: "https://plus.unsplash.com/premium_photo-1673809798970-30c14cfd0ab6?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzd8fGZvb2R8ZW58MHx8MHx8fDA%3D",
@@ -89,7 +89,7 @@ class RecipeProvider with ChangeNotifier {
       ),
       Recipe(
         id: 'r8',
-        title: "ChillDrips!",
+        title: "Jollof alike!",
         description: "Sweet chill time dripping dopped",
         prepTime: '30 mins',
         rate: 4.5,
@@ -99,7 +99,7 @@ class RecipeProvider with ChangeNotifier {
       Recipe(
         id: 'r9',
         title: "Ice filled!",
-        description: "Rest time enhancer",
+        description: "refill your rest time, stay energized.",
         prepTime: '30 mins',
         rate: 4.5,
         url: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzZ8fGZvb2R8ZW58MHx8MHx8fDA%3D",

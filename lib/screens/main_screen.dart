@@ -40,28 +40,28 @@ bool isTablet(BuildContext context) {
               child: Center(child: Text('Choose Categories', style: Theme.of(context).textTheme.bodySmall,)),
             ),
             ListTile(
-              leading: const Icon(Icons.fastfood_outlined),
-              title: const Text('Quick'),
+              leading: const Icon(Icons.flash_on_outlined),
+              title: const Text('FastFood'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.accessibility_new_outlined),
+              leading: const Icon(Icons.whatshot_outlined),
               title: const Text('Trending'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.flag_outlined),
-              title: const Text('Nigeria'),
+              leading: const Icon(Icons.pin_drop_outlined),
+              title: const Text('Local Recipes'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              leading: const Icon(Icons.smart_toy_outlined),
+              leading: const Icon(Icons.psychology_outlined),
               title: const Text('Smart Suggestion (Ai)'),
               onTap: () {
                 Navigator.pop(context);
@@ -173,8 +173,7 @@ bool isTablet(BuildContext context) {
                     label: 'Home',
                   ),
                   NavigationDestination(
-                    icon: Icon(Icons.food_bank_outlined),
-                    selectedIcon: Icon(Icons.restaurant_menu_outlined),
+                    icon: Icon(Icons.fastfood_outlined),
                     label: 'Categories',
                   ),
                   NavigationDestination(

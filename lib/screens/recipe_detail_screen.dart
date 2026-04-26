@@ -16,12 +16,12 @@ class RecipeDetailScreen extends StatelessWidget {
   switch (action){
     case MenuAction.download:
     ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Download action triggered!')),
+          const SnackBar(content: Text('Downloading recipe...')),
     );
     break;
     case MenuAction.share:
     ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Share action triggered!')),
+          const SnackBar(content: Text('Sharing recipe...')),
     );
     break;
     case MenuAction.settings:
@@ -94,10 +94,16 @@ class RecipeDetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.network(
-                recipe.url,
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => const Icon(Icons.broken_image, size: 120),
+              Card(
+                elevation: 0,
+                margin: const EdgeInsets.all(5.0),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                clipBehavior: Clip.antiAlias,
+                child: Image.network(
+                  recipe.url,
+                  fit: BoxFit.cover,
+                  errorBuilder: (_, __, ___) => const Icon(Icons.broken_image, size: 120),
+                ),
               ),
               
               Padding(
@@ -106,7 +112,6 @@ class RecipeDetailScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Row(
-                                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Expanded(
                                           child: Text(
@@ -129,7 +134,6 @@ class RecipeDetailScreen extends StatelessWidget {
                                       children: [
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
-                                          //elevation: 0.2,
                                           child: Padding(
                                             padding: const EdgeInsets.all(3.0),
                                             child: Row(
@@ -149,10 +153,8 @@ class RecipeDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        //const SizedBox(width: 3,),
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
-                                          //elevation: 0.2,
                                           child: Padding(
                                             padding: const EdgeInsets.all(3.0),
                                             child: Row(
@@ -174,10 +176,8 @@ class RecipeDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        //const SizedBox(width: 3,),
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
-                                          //elevation: 0.2,
                                           child: Padding(
                                             padding: const EdgeInsets.all(3.0),
                                             child: Row(
@@ -197,10 +197,8 @@ class RecipeDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        //const SizedBox(width: 3,),
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
-                                          //elevation: 0.2,
                                           child: Padding(
                                             padding: const EdgeInsets.all(3.0),
                                             child: Row(
@@ -228,10 +226,8 @@ class RecipeDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        //const SizedBox(width: 3,),
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
-                                          //elevation: 0.2,
                                           child: Padding(
                                             padding: const EdgeInsets.all(3.0),
                                             child: Row(
@@ -259,10 +255,8 @@ class RecipeDetailScreen extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                        //const SizedBox(width: 3,),
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
-                                          //elevation: 0.2,
                                           child: Padding(
                                             padding: const EdgeInsets.all(3.0),
                                             child: GestureDetector(
@@ -279,128 +273,87 @@ class RecipeDetailScreen extends StatelessWidget {
                                         ),
                                       ],
                                     ),
-                                    const SizedBox(height: 10,),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 40,
-                                      decoration: BoxDecoration(
-                                        color: Colors.lightGreen,
-                                        borderRadius: BorderRadius.circular(12),
-                                      ),
-                                      child: Center(
-                                        child: TextButton(
-                                          onPressed: (){}, 
-                                          child: const Text('Save', style: TextStyle(color: Colors.white),)
-                                          ),
-                                      ),
-                                    ),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 10,),
-                              Container(
-                                      width: double.infinity,
-                                      height: 250,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[50],
-                                        borderRadius: BorderRadius.circular(30),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 120.0),
+                                child: Container(
+                                        width: double.infinity,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[100],
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                        child: SingleChildScrollView(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    // Navigate to display list of ingredients!
+                                                  },
+                                                  child: Text('Ingredients...', style: Theme.of(context).textTheme.bodySmall, maxLines: 1, overflow: TextOverflow.ellipsis,),
+                                                ),
+                                                SizedBox(height: 20,),
+                                                Text('Tips: click on ingredients to view details', ),
+                                              ],
+                                            ),
+                                          )
+                                        ),
                                       ),
-                                      child: SingleChildScrollView(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Ingredients:', style: Theme.of(context).textTheme.bodySmall,),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                              Text('Small Chops'),
-                                            ],
-                                          ),
-                                        )
+                              ),
+                                    const SizedBox(height: 20,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 40.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[100],
+                                          borderRadius: BorderRadius.circular(30),
+                                        ),
+                                        child: SingleChildScrollView(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(15.0),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                GestureDetector(
+                                                  onTap: () {
+                                                    // Navigate to display preparation steps!
+                                                  },
+                                                  child: Text('Preparation...', style: Theme.of(context).textTheme.bodySmall,),
+                                                ),
+                                                SizedBox(height: 20),
+                                                Text('Tips: click on preparation to view details'),
+                                              ],
+                                            ),
+                                          )
+                                        ),
                                       ),
                                     ),
-                                    const SizedBox(height: 20,),
-                                    Container(
-                                      width: double.infinity,
-                                      height: 250,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[50],
-                                        borderRadius: BorderRadius.circular(30),
+                                    /*const SizedBox(height: 10,),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 210.0),
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: 40,
+                                        decoration: BoxDecoration(
+                                          color: Colors.lightGreen,
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: Center(
+                                          child: TextButton(
+                                            onPressed: (){}, 
+                                            child:  const Text('Start Cooking', style: TextStyle(color: Colors.white),)
+                                            ),
+                                        ),
                                       ),
-                                      child: SingleChildScrollView(
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(15.0),
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              Text('Preparation:', style: Theme.of(context).textTheme.bodySmall,),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                              Text('Preparation will be precise and clear.'),
-                                            ],
-                                          ),
-                                        )
-                                      ),
-                                    )
+                                    ),*/
             ],
           ),
         ),

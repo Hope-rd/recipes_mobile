@@ -18,8 +18,8 @@ ThemeData lightMode = ThemeData(
     ),
 
     cardTheme: CardThemeData(
-      color: const Color.fromARGB(255, 250, 250, 250),
-      elevation: 0.2,
+      color: const Color.fromARGB(255, 245, 245, 245),
+      elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),

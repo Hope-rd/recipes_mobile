@@ -26,7 +26,7 @@ class VideoPlayerProvider extends ChangeNotifier {
       chewieController = ChewieController(
         videoPlayerController: videoController,
         autoPlay: true,           // Change to true if you want auto play
-        looping: false,
+        looping: true,
         showControls: true,
         materialProgressColors: ChewieProgressColors(
           playedColor: Colors.red,

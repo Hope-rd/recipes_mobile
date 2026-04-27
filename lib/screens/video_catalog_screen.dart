@@ -31,7 +31,8 @@ class VideoPlayerPageContent extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         //title: const Text('Recipe Video'),
-        backgroundColor: Colors.black,
+        leading: BackButton(color: Colors.grey,),
+        backgroundColor: Colors.transparent,
       ),
       body: provider.hasError
           ? Center(

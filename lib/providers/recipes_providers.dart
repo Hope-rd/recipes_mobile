@@ -26,12 +26,22 @@ class RecipeProvider with ChangeNotifier {
     _allRecipes = [
       Recipe(
         id: 'r1',
+        title: "recipe video!",
+        description: "#chef alice.",
+        prepTime: '',
+        rate: 4.5,
+        url: "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+        type: MediaType.video,
+        thumbnailUrl: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624"
+      ),
+      Recipe(
+        id: 'r1',
         title: "Easy One-Pot Beef Stew Favourite Dinner",
         description: "Easy One-Pot Beef Stew for a cozy family Favourite Dinner",
         prepTime: '30 mins',
         rate: 4.5,
         url: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fGZvb2R8ZW58MHx8MHx8fDA%3D",
-        type: MediaType.video
+        type: MediaType.image
       ),
       Recipe(
         id: 'r2',

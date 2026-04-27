@@ -45,15 +45,15 @@ class Catalogs extends StatelessWidget {
       children: [
         // Use video's first frame or a poster image (many video APIs provide thumbnails)
         Image.network(
-          recipe.url,
+          recipe.thumbnailUrl!,
           fit: BoxFit.cover,
           width: double.infinity,
         ),
-        const Center(
+        Center(
           child: Icon(
             Icons.play_arrow_outlined,
-            size: 55,
-            color: Colors.white70,
+            size: 60,
+            color: Theme.of(context).colorScheme.secondary,
           ),
         ),
       ],
@@ -130,7 +130,7 @@ class Catalogs extends StatelessWidget {
             return RefreshIndicator(
               onRefresh: provider.loadRecipes,
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 0, top: 0),
                 child: MasonryGridView.builder(
                   controller: scrollController,
                   gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(

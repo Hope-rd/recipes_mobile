@@ -10,6 +10,7 @@ class Recipe {
   final double rate;
   final String url;
   final MediaType type; // either image or video.
+  String? thumbnailUrl;
 
   bool isSaved = false;
   Recipe({
@@ -19,6 +20,7 @@ class Recipe {
     required this.prepTime,
     required this.rate,
     required this.url,
-    required this.type
+    required this.type,
+    this.thumbnailUrl,
   });
 }

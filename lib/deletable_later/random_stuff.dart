@@ -41,3 +41,8 @@ Stack(
 */
 
 // To import a random image from the internet, just click on the image and copy the image address.
+
+// Next Step: 
+// 1. Test the videos, make sure they work and are properly integrated.
+// 2. Implement and connect the user experience in the categories section, make sure the categories are properly filtering the recipes and displaying the correct results.
+// 3. In the recipe detail screen, find the best way to display the ingredients and preparation details, make sure they are easily accessible and user-friendly. 

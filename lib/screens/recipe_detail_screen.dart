@@ -96,7 +96,7 @@ class RecipeDetailScreen extends StatelessWidget {
             children: [
               Card(
                 elevation: 0,
-                margin: const EdgeInsets.all(5.0),
+                margin: const EdgeInsets.only(left: 5.0, right: 5.0, bottom: 5.0, top: 0),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 clipBehavior: Clip.antiAlias,
                 child: Image.network(

@@ -41,28 +41,28 @@ bool isTablet(BuildContext context) {
             ),
             ListTile(
               leading: const Icon(Icons.flash_on_outlined),
-              title: const Text('FastFood'),
+              title: Text('FastFood', style: Theme.of(context).textTheme.bodyLarge),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               leading: const Icon(Icons.whatshot_outlined),
-              title: const Text('Trending'),
+              title: Text('Trending', style: Theme.of(context).textTheme.bodyLarge),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               leading: const Icon(Icons.pin_drop_outlined),
-              title: const Text('Local Recipes'),
+              title: Text('Local Recipes', style: Theme.of(context).textTheme.bodyLarge),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
               leading: const Icon(Icons.psychology_outlined),
-              title: const Text('Smart Suggestion (Ai)'),
+              title: Text('Smart Suggestion (Ai)', style: Theme.of(context).textTheme.bodyLarge),
               onTap: () {
                 Navigator.pop(context);
               },

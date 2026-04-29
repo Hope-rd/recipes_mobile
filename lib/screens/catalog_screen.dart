@@ -49,11 +49,17 @@ class Catalogs extends StatelessWidget {
           fit: BoxFit.cover,
           width: double.infinity,
         ),
-        Center(
-          child: Icon(
-            Icons.play_arrow_outlined,
-            size: 60,
-            color: Theme.of(context).colorScheme.secondary,
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.blueGrey.withValues(alpha: 0.7),
+            shape: BoxShape.circle
+          ),
+          child: Center(
+            child: Icon(
+              Icons.play_arrow_outlined,
+              size: 40,
+              color: Theme.of(context).colorScheme.secondary,
+            ),
           ),
         ),
       ],
@@ -91,16 +97,16 @@ class Catalogs extends StatelessWidget {
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  margin: EdgeInsets.all(16),
+                  margin: EdgeInsets.all(14),
                   decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.surface,
-                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.grey[200], //Theme.of(context).colorScheme.surface,
+                    borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
-                        color: Color.fromARGB(255, 158, 158, 158).withValues(alpha: 0.1), // Shadow color
+                        color: Theme.of(context).colorScheme.surface, //Color.fromARGB(255, 238, 238, 238).withValues(alpha: 10), // Shadow color
                         spreadRadius: 1, // How much the shadow spreads
                         blurRadius: 3, // The softness of the shadow
-                        offset: Offset(1, 1), // Moves the shadow down by 3 pixels
+                        offset: Offset(1, 1), // Moves the shadow down by 1 pixels
                       )
                     ]
                   ),
@@ -110,7 +116,7 @@ class Catalogs extends StatelessWidget {
                       SizedBox(width: 10),
                       Text(
                         'Search recipes...',
-                        style: TextStyle(color: Colors.grey[600]),
+                        style: TextStyle(color: Colors.grey[600], fontSize: 12),
                       )
                     ],
                   ),

@@ -36,7 +36,7 @@ class RecipeDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         leadingWidth: 120,
         leading: Row(
           mainAxisSize: MainAxisSize.min,
@@ -135,7 +135,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(7.0),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               mainAxisSize: MainAxisSize.min,
@@ -156,7 +156,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(7.0),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               mainAxisSize: MainAxisSize.min,
@@ -179,7 +179,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(7.0),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               mainAxisSize: MainAxisSize.min,
@@ -200,7 +200,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(7.0),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               mainAxisSize: MainAxisSize.min,
@@ -229,7 +229,7 @@ class RecipeDetailScreen extends StatelessWidget {
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(7.0),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               mainAxisSize: MainAxisSize.min,
@@ -258,13 +258,13 @@ class RecipeDetailScreen extends StatelessWidget {
                                         Card(
                                           color: Theme.of(context).cardTheme.color,
                                           child: Padding(
-                                            padding: const EdgeInsets.all(3.0),
+                                            padding: const EdgeInsets.all(7.0),
                                             child: GestureDetector(
                                               onTap: () => provider.toggleSaved(recipe),
                                             child: Icon(
                                             provider.isSaved(recipe)
                                                 ? Icons.bookmark_added_rounded
-                                                : Icons.bookmark_add_outlined,
+                                                : Icons.bookmark_border_outlined,
                                             color: provider.isSaved(recipe) ? Colors.deepOrange : null,
                                             size: 20,
                                                 ),

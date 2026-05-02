@@ -36,7 +36,7 @@ bool isTablet(BuildContext context) {
         mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(12.0),
               child: Center(child: Text('Choose Categories', style: Theme.of(context).textTheme.bodySmall,)),
             ),
             ListTile(
@@ -122,7 +122,7 @@ bool isTablet(BuildContext context) {
                 NavigationRailDestination(
                   icon: Icon(Icons.person_outlined),
                   selectedIcon: Icon(Icons.person),
-                  label: Text('Profile'),
+                  label: Text('You'),
                 ),
               ],
             ),
@@ -143,9 +143,9 @@ bool isTablet(BuildContext context) {
               valueListenable: visibilityProvider.isVisible, 
               builder: (context, isVisible, child) {
                 return AnimatedContainer(
-                  duration: const Duration(milliseconds: 350),
+                  duration: const Duration(milliseconds: 280),
                   height: isVisible ? bottomNavHeight : 0,
-                  curve: Curves.easeInOut,
+                  curve: Curves.easeOut,
                   child: isVisible
                   ? NavigationBar(
               backgroundColor: Theme.of(context).colorScheme.surface,
@@ -179,7 +179,7 @@ bool isTablet(BuildContext context) {
                   NavigationDestination(
                     icon: Icon(Icons.person_outlined),
                     selectedIcon: Icon(Icons.person),
-                    label: 'Profile',
+                    label: 'You',
                   ),
                 ],
               )
@@ -193,15 +193,34 @@ bool isTablet(BuildContext context) {
 
 // ==================== SCROLL LISTENER HELPER ====================
   void _setupScrollListener(ScrollController controller, NavVisibilityProvider visibilityProvider) {
-    controller.addListener(() {
-      if (!controller.hasClients) return;
+  // Prevent adding the listener multiple times
+  if (controller.hasListeners) return;
 
-      final direction = controller.position.userScrollDirection;
+  double lastOffset = 0.0;
+  const double threshold = 25.0;   // ← Tune this (20-40 works well)
 
-      if (direction == ScrollDirection.reverse) {
-        visibilityProvider.updateVisibility(false);
-      } else if (direction == ScrollDirection.forward) {
-        visibilityProvider.updateVisibility(true);
+  controller.addListener(() {
+    if (!controller.hasClients) return;
+
+    final currentOffset = controller.offset;
+    final direction = controller.position.userScrollDirection;
+
+    bool shouldHide = visibilityProvider.isVisible.value; // current state
+
+    if (direction == ScrollDirection.reverse) {
+      if (currentOffset - lastOffset > threshold) {
+        shouldHide = true;
       }
-    });
-  }
+    } else if (direction == ScrollDirection.forward) {
+      if (lastOffset - currentOffset > threshold) {
+        shouldHide = false;
+      }
+    }
+
+    if (shouldHide != visibilityProvider.isVisible.value) {
+      visibilityProvider.onScroll(controller);
+    }
+
+    lastOffset = currentOffset;
+  });
+}

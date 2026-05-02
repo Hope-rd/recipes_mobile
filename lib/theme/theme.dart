@@ -31,7 +31,7 @@ ThemeData lightMode = ThemeData(
       TextTheme(
         bodyLarge: TextStyle(color: Color(0xFF1C1C1C), fontSize: 16),
       bodyMedium: TextStyle(color: Color(0xFF36454F), fontSize: 10),
-      bodySmall: TextStyle(color: Color(0xFF1C1C1C), fontWeight: FontWeight.bold),
+      bodySmall: TextStyle(color: Color(0xFF1C1C1C), fontWeight: FontWeight.w400),
       
       titleLarge: TextStyle(
         color: Color(0xFF282828),
@@ -52,6 +52,11 @@ ThemeData lightMode = ThemeData(
         color: Color(0xFF1C1C1C),
         fontSize: 9,
         fontWeight: FontWeight.w500
+      ),
+      headlineSmall: TextStyle(
+        color: Color(0xFF1C1C1C),
+        fontSize: 15,
+        fontWeight: FontWeight.bold
       )
       )
     ),

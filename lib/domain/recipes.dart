@@ -4,6 +4,7 @@ enum MediaType { image, video }
 
 class Recipe {
   final String id; // we'll generate simple ids like "r1", "r2"...
+  final String? author;
   final String title;
   final String description;
   final String prepTime;
@@ -15,6 +16,7 @@ class Recipe {
   bool isSaved = false;
   Recipe({
     required this.id,
+    this.author,
     required this.title,
     required this.description,
     required this.prepTime,

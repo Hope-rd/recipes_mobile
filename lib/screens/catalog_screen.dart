@@ -71,23 +71,45 @@ class Catalogs extends StatelessWidget {
     if (provider.recipes.isEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         provider.loadRecipes();
+        if (!scrollController.hasListeners) {
+        scrollController.addListener(() {
+          visibilityProvider.onScroll(scrollController);
+        });
+      }
       });
     }
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SafeArea(
+        minimum: EdgeInsets.zero,
         child: Column(
           children: [
-            ValueListenableBuilder<bool>(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                ValueListenableBuilder<bool>(
               valueListenable: visibilityProvider.isVisible, 
               builder: (context, isVisible, child) {
                 return AnimatedContainer(
-                  duration: const Duration(milliseconds: 350),
+                  duration: const Duration(milliseconds: 280),
                   height: isVisible ? searchHeight : 0,
-                  curve: Curves.easeInOut,
+                  curve: Curves.easeOut,
                   child: isVisible
-                  ? GestureDetector(
+                  ? Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                   mainAxisSize: MainAxisSize.max,
+                   children: [
+                    TextButton(
+                  onPressed: () {
+                    provider.loadRecipes();
+                  }, 
+                  child: Text("All",
+                  style: Theme.of(context).textTheme.headlineSmall,)
+                ),
+
+                    GestureDetector(
                 onTap: (){
                   // Navigate to search screen
                   showSearch(
@@ -96,19 +118,11 @@ class Catalogs extends StatelessWidget {
                 );
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  margin: EdgeInsets.all(14),
+                  padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                  margin: EdgeInsets.all(18.0),
                   decoration: BoxDecoration(
-                    color: Colors.grey[200], //Theme.of(context).colorScheme.surface,
+                    color: Colors.grey[200],
                     borderRadius: BorderRadius.circular(30),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Theme.of(context).colorScheme.surface, //Color.fromARGB(255, 238, 238, 238).withValues(alpha: 10), // Shadow color
-                        spreadRadius: 1, // How much the shadow spreads
-                        blurRadius: 3, // The softness of the shadow
-                        offset: Offset(1, 1), // Moves the shadow down by 1 pixels
-                      )
-                    ]
                   ),
                   child: Row(
                     children: [
@@ -121,77 +135,101 @@ class Catalogs extends StatelessWidget {
                     ],
                   ),
                 ),
-              )
+              ),
+
+              Stack(
+                  alignment: Alignment.topRight,
+                   children: [
+                     IconButton(
+                    onPressed: (){}, 
+                    icon: Icon(Icons.notifications_active_outlined, color: Colors.grey[900],)
+                    ),
+                     Container(
+                      width: 16,
+                      height: 16,
+                      decoration: BoxDecoration(
+                        color: Colors.redAccent,
+                        shape: BoxShape.circle
+                      ),
+                      child: Center(child: Text("10", style: TextStyle(fontSize: 11, color: Colors.white, fontWeight: FontWeight.bold),)),
+                     )
+                   ],
+              ),
+                   ], 
+                  )
               : const SizedBox.shrink(),
                   );
               }
               ),
+              ],
+            ),
+        
         Expanded(
           child: Consumer<RecipeProvider>(
           builder: (context, provider, child) {
             if (provider.recipes.isEmpty) {
-              return const Center(child: CircularProgressIndicator(color: Colors.grey,));
+              return  Center(
+                child: CircularProgressIndicator(color: Colors.blueGrey.withValues(alpha: 0.7),)
+                );
             }
         
             return RefreshIndicator(
               onRefresh: provider.loadRecipes,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 0, top: 0),
-                child: MasonryGridView.builder(
-                  controller: scrollController,
-                  gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: getGridCrossAxisCount(context),
-                  ),
-                  mainAxisSpacing: 16.0,
-                  crossAxisSpacing: 16.0,
-                  itemCount: provider.recipes.length,
-                  itemBuilder: (context, index) {
-                    final recipe = provider.recipes[index];
-                    return GestureDetector(
-                      onTap: () {
-                        if (recipe.type == MediaType.image){
-                          Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => RecipeDetailScreen(recipe: recipe),
-                        ),
-                      );
-                        } else {
-                          Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => VideoPlayerPage(
-                               videoUrl: recipe.url,        // from url list
-                          ),
-                        ),
-                      );
-                        }
-                      },
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Card(
-                            elevation: 0,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                            clipBehavior: Clip.antiAlias,
-                            child: Column(
-                              children: [
-                                buildMedia(recipe),
-                              ],
-                            ),
-                          ),
-                          Text(
-                            recipe.title,
-                            style: Theme.of(context).textTheme.bodySmall,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+              child: MasonryGridView.builder(
+                controller: scrollController,
+                gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: getGridCrossAxisCount(context),
+                ),
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 0.0,
+                itemCount: provider.recipes.length,
+                itemBuilder: (context, index) {
+                  final recipe = provider.recipes[index];
+                  return GestureDetector(
+                    onTap: () {
+                      if (recipe.type == MediaType.image){
+                        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => RecipeDetailScreen(recipe: recipe),
                       ),
                     );
-                  },
-                ),
+                      } else {
+                        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => VideoPlayerPage(
+                             videoUrl: recipe.url,        // from url list
+                        ),
+                      ),
+                    );
+                      }
+                    },
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Card(
+                          elevation: 0,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          clipBehavior: Clip.antiAlias,
+                          child: Column(
+                            children: [
+                              buildMedia(recipe),
+                            ],
+                          ),
+                        ),
+                        Text(
+                          recipe.title,
+                          style: Theme.of(context).textTheme.bodySmall,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.start,
+                        ),
+                      ],
+                    ),
+                  );
+                },
               ),
             );
           },
@@ -206,18 +244,37 @@ class Catalogs extends StatelessWidget {
 
 // ==================== SCROLL LISTENER HELPER ====================
   void _setupScrollListener(ScrollController controller, NavVisibilityProvider visibilityProvider) {
-    controller.addListener(() {
-      if (!controller.hasClients) return;
+  // Prevent adding the listener multiple times
+  if (controller.hasListeners) return;
 
-      final direction = controller.position.userScrollDirection;
+  double lastOffset = 0.0;
+  const double threshold = 10.0;   // ← Tune this (20-40 works well)
 
-      if (direction == ScrollDirection.reverse) {
-        visibilityProvider.updateVisibility(false);
-      } else if (direction == ScrollDirection.forward) {
-        visibilityProvider.updateVisibility(true);
+  controller.addListener(() {
+    if (!controller.hasClients) return;
+
+    final currentOffset = controller.offset;
+    final direction = controller.position.userScrollDirection;
+
+    bool shouldHide = visibilityProvider.isVisible.value; // current state
+
+    if (direction == ScrollDirection.reverse) {
+      if (currentOffset - lastOffset > threshold) {
+        shouldHide = true;
       }
-    });
-  }
+    } else if (direction == ScrollDirection.forward) {
+      if (lastOffset - currentOffset > threshold) {
+        shouldHide = false;
+      }
+    }
+
+    if (shouldHide != visibilityProvider.isVisible.value) {
+      visibilityProvider.onScroll(controller);
+    }
+
+    lastOffset = currentOffset;
+  });
+}
 
 class RecipeSearchDelegate extends SearchDelegate<String> {
   final RecipeProvider provider;
